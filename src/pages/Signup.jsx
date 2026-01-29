@@ -1,13 +1,15 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
-function Signup({ onToggle }) {
+function Signup() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -58,13 +60,9 @@ function Signup({ onToggle }) {
     setPassword('');
     setConfirmPassword('');
     
-    // Showing success message
+    // Redirect to feed after showing success message
     setTimeout(() => {
-      setSuccess('');
-      setUsername('');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
+      navigate('/feed');
     }, 1500);
   };
 
@@ -123,9 +121,11 @@ function Signup({ onToggle }) {
             Create account
           </button>
           
-          <button className="btn ghost" type="button" onClick={onToggle}>
-            Already have an account?
-          </button>
+          <Link to="/">
+            <button className="btn ghost" type="button">
+              Already have an account?
+            </button>
+          </Link>
         </form>
       </div>
     </div>
